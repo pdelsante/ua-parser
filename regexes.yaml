@@ -602,52 +602,173 @@ os_parsers:
   # spoofs nt 6.1. must come before windows 7
   - regex: '(XBLWP7)'
     os_replacement: 'Windows Phone'
+    os_v1_replacement: '7'
 
   # @note: This needs to come before Windows NT 6.1
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
-  - regex: '(Windows (?:NT 5\.2|NT 5\.1))'
-    os_replacement: 'Windows XP'
+  - regex: '(Windows NT 5\.2)'
+    os_replacement: 'Windows Server 2003'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '5'
+    os_v3_replacement: '2'
 
+  - regex: '(Windows NT 5\.1)'
+    os_replacement: 'Windows XP'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '5'
+    os_v3_replacement: '1'
+    
   - regex: '(Windows NT 6\.1)'
     os_replacement: 'Windows 7'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '1'
 
   - regex: '(Windows NT 6\.0)'
     os_replacement: 'Windows Vista'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '0'
 
   - regex: '(Win 9x 4\.90)'
     os_replacement: 'Windows ME'
+    os_v1_replacement: '4'
+    os_v2_replacement: '90'
 
-  - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000|Windows 3.1)'
+  - regex: '(Windows 98)'
+    os_replacement: "Windows 98"
+    os_v1_replacement: '4'
+    os_v2_replacement: '10'
+    
+  - regex: '(Windows 95)'
+    os_replacement: "Windows 95"
+    os_v1_replacement: '4'
+    os_v2_replacement: '0'
+
+  - regex: '(Windows XP)'
+    os_replacement: "Windows XP"
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '5'
+    os_v3_replacement: '1'
+
+  - regex: '(Windows ME)'
+    os_replacement: "Windows ME"
+    os_v1_replacement: '4'
+    os_v2_replacement: '90'
+  
+  - regex: '(Windows 7)'
+    os_replacement: "Windows 7"
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '1'
+  
+  - regex: '(Windows NT 4\.0)'
+    os_replacement: "Windows NT 4.0"
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '4'
+    os_v3_replacement: '0'
+  
+  - regex: '(Windows Vista)'
+    os_replacement: "Windows Vista"
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '0'
+  
+  - regex: '(Windows 2000)'
+    os_replacement: "Windows 2000"
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '5'
+    os_v3_replacement: '0'
+    
+  - regex: '(Windows 3\.1)'
+    os_replacement: "Windows 3.1"
+    os_v1_replacement: '3'
+    os_v2_replacement: '1'
+  
+  - regex: '(Windows CE)'
 
   - regex: '(Windows NT 6\.2; ARM;)'
     os_replacement: 'Windows RT'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '2'
+    
   - regex: '(Windows NT 6\.2)'
     os_replacement: 'Windows 8'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '2'
 
   - regex: '(Windows NT 6\.3; ARM;)'
     os_replacement: 'Windows RT 8.1'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '3'
+    
   - regex: '(Windows NT 6\.3)'
     os_replacement: 'Windows 8.1'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '6'
+    os_v3_replacement: '3'
 
   - regex: '(Windows NT 5\.0)'
     os_replacement: 'Windows 2000'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '5'
+    os_v3_replacement: '1'
 
   - regex: '(WinNT4.0)'
     os_replacement: 'Windows NT 4.0'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '4'
+    os_v3_replacement: '0'
 
   - regex: '(Windows ?CE)'
     os_replacement: 'Windows CE'
 
-  - regex: 'Win ?(95|98|3.1|NT|ME|2000)'
-    os_replacement: 'Windows $1'
+  - regex: 'Win 95'
+    os_replacement: 'Windows 95'
+    os_v1_replacement: '4'
+    os_v2_replacement: '0'
+
+  - regex: '(Win 98)'
+    os_replacement: 'Windows 98'
+    os_v1_replacement: '4'
+    os_v2_replacement: '10'
+
+  - regex: '(Win 3.1)'
+    os_replacement: 'Windows 3.1'
+    os_v1_replacement: '3'
+    os_v2_replacement: '1'
+
+  - regex: '(Win NT)'
+    os_replacement: 'Windows NT'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '4'
+    os_v3_replacement: '0'
+
+  - regex: '(Win ME)'
+    os_replacement: 'Windows ME'
+    os_v1_replacement: '4'
+    os_v2_replacement: '90'
+
+  - regex: '(Win 2000)'
+    os_replacement: 'Windows 2000'
+    os_v1_replacement: 'NT'
+    os_v2_replacement: '5'
+    os_v2_replacement: '0'
 
   - regex: 'Win16'
     os_replacement: 'Windows 3.1'
+    os_v1_replacement: '3'
+    os_v2_replacement: '1'
 
   - regex: 'Win32'
     os_replacement: 'Windows 95'
+    os_v1_replacement: '4'
+    os_v2_replacement: '0'
 
   ##########
   # Tizen OS from Samsung
