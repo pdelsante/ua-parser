@@ -33,7 +33,7 @@ regex_dir = ROOT_DIR if os.path.exists(os.path.join(ROOT_DIR, 'regexes.yaml')) e
 
 
 class UserAgentParser(object):
-    def __init__(self, pattern, family_replacement=None, v1_replacement=None, v2_replacement=None):
+    def __init__(self, pattern, family_replacement=None, v1_replacement=None, v2_replacement=None, v3_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
@@ -41,12 +41,14 @@ class UserAgentParser(object):
           family_replacement: a string to override the matched family (optional)
           v1_replacement: a string to override the matched v1 (optional)
           v2_replacement: a string to override the matched v2 (optional)
+          v3_replacement: a string to override the matched v3 (optional)
         """
         self.pattern = pattern
         self.user_agent_re = re.compile(self.pattern)
         self.family_replacement = family_replacement
         self.v1_replacement = v1_replacement
         self.v2_replacement = v2_replacement
+        self.v3_replacement = v3_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -78,14 +80,16 @@ class UserAgentParser(object):
             elif match.lastindex and match.lastindex >= 3:
                 v2 = match.group(3)
 
-            if match.lastindex and match.lastindex >= 4:
+            if self.v3_replacement:
+                v3 = self.v3_replacement
+            elif match.lastindex and match.lastindex >= 4:
                 v3 = match.group(4)
 
         return family, v1, v2, v3
 
 
 class OSParser(object):
-    def __init__(self, pattern, os_replacement=None, os_v1_replacement=None, os_v2_replacement=None):
+    def __init__(self, pattern, os_replacement=None, os_v1_replacement=None, os_v2_replacement=None, os_v3_replacement=None):
         """Initialize UserAgentParser.
 
         Args:
@@ -93,12 +97,14 @@ class OSParser(object):
           os_replacement: a string to override the matched os (optional)
           os_v1_replacement: a string to override the matched v1 (optional)
           os_v2_replacement: a string to override the matched v2 (optional)
+          os_v3_replacement: a string to override the matched v3 (optional)
         """
         self.pattern = pattern
         self.user_agent_re = re.compile(self.pattern)
         self.os_replacement = os_replacement
         self.os_v1_replacement = os_v1_replacement
         self.os_v2_replacement = os_v2_replacement
+        self.os_v3_replacement = os_v3_replacement
 
     def MatchSpans(self, user_agent_string):
         match_spans = []
@@ -130,10 +136,13 @@ class OSParser(object):
             elif match.lastindex and match.lastindex >= 3:
                 os_v2 = match.group(3)
 
-            if match.lastindex and match.lastindex >= 4:
+            if self.os_v3_replacement:
+                os_v3 = self.os_v3_replacement
+            elif match.lastindex and match.lastindex >= 4:
                 os_v3 = match.group(4)
-                if match.lastindex >= 5:
-                    os_v4 = match.group(5)
+
+            if match.lastindex >= 5:
+                os_v4 = match.group(5)
 
         return os, os_v1, os_v2, os_v3, os_v4
 
@@ -452,10 +461,15 @@ for _ua_parser in regexes['user_agent_parsers']:
     if 'v2_replacement' in _ua_parser:
         _v2_replacement = _ua_parser['v2_replacement']
 
+    _v3_replacement = None
+    if 'v3_replacement' in _ua_parser:
+        _v3_replacement = _ua_parser['v3_replacement']
+
     USER_AGENT_PARSERS.append(UserAgentParser(_regex,
                                               _family_replacement,
                                               _v1_replacement,
-                                              _v2_replacement))
+                                              _v2_replacement,
+                                              _v3_replacement))
 
 OS_PARSERS = []
 for _os_parser in regexes['os_parsers']:
@@ -473,10 +487,15 @@ for _os_parser in regexes['os_parsers']:
     if 'os_v2_replacement' in _os_parser:
         _os_v2_replacement = _os_parser['os_v2_replacement']
 
+    _os_v3_replacement = None
+    if 'os_v3_replacement' in _os_parser:
+        _os_v3_replacement = _os_parser['os_v3_replacement']
+
     OS_PARSERS.append(OSParser(_regex,
                                _os_replacement,
                                _os_v1_replacement,
-                               _os_v2_replacement))
+                               _os_v2_replacement,
+                               _os_v3_replacement))
 
 
 DEVICE_PARSERS = []
